@@ -1,7 +1,15 @@
 import java.util.*;
 
 class Solution{
-  static boolean isValidValue(int value){
+  static boolean isValidValue(String temp){
+
+    //length > 3 is false and if leading zeros false.
+    if(temp.length() > 3 || (temp.indexOf("0") == 0) ){
+      return false;
+    }
+
+    int value = Integer.parseInt(temp);
+    // each value should be in range [0 - 255]
     if(!(value >=0 && value <=255)){
       return false;
     }
@@ -15,9 +23,10 @@ class Solution{
       return false;
     }
 
-    for(String a: values){
+    for(String value: values){
+
       try{
-        if(!isValidValue(Integer.parseInt(a))){
+        if(!isValidValue(value)){
           return false;
         }
       }
@@ -30,10 +39,13 @@ class Solution{
 
   public static void main(String a[]){
 
-    String[] inputs = new String[]{"128.0.0.1",
+    String[] inputs = new String[]{"128.0.0.01",
                                    "125.16.100.1",
                                    "5555.123.123.123.123.555",
-                                   "125.512.100.abc"};
+                                   "125.512.100.abc",
+                                   "abc.123.223.225",
+                                   "0000.0000.0000.0000"
+                                 };
     for(String input: inputs){
       System.out.println(input+"->"+isValidIp(input));
     }
